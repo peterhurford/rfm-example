@@ -2,7 +2,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import time
 
-filename = 'trans10m.csv'
+filename = 'data/trans10m.csv'
 print 'Starting...'
 num_lines = sum(1 for line in open(filename))
 print '...File length is {}'.format(num_lines)
