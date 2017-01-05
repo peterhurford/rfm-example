@@ -1,3 +1,4 @@
+from collections import Counter
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import time
@@ -41,7 +42,7 @@ with open(filename, 'r') as filehandle:
                                  speed=str(speed),
                                  remain=remaining_time)
 
-print 'Processing...'
+print 'Processing raw RFM data...'
 rfm_customer = {}
 ending_date = datetime(2013, 7, 27, 0, 0)
 one_year_ago = ending_date - relativedelta(years=1)
@@ -51,6 +52,19 @@ for idx, customer in customers.iteritems():
         'frequency': len(filter(lambda x: x['date'] > one_year_ago, customer)),
         'monetization': sum(map(lambda x: x['amount'], customer)) / float(len(customer))
     }
+
+print 'Converting to RFM score...'
+def ordinal_score(data, key):
+    score = sorted(zip(map(lambda x: x[key], data.values()), data.keys()))
+    return Counter(dict(map(lambda x: (x[1][1], x[0]), zip(range(len(score)), score))))
+
+frequency_scores = ordinal_score(rfm_customer, 'frequency')
+recency_scores = ordinal_score(rfm_customer, 'recency')
+monetization_scores = ordinal_score(rfm_customer, 'monetization')
+
+rfm_scores = frequency_scores + recency_scores + monetization_scores
+customers_sorted_by_rfm = map(lambda x: x[0], sorted(rfm_scores.items(), key=lambda x: x[1]))
+
 
 print 'Awaiting further commands...'
 import pdb
