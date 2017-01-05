@@ -49,8 +49,9 @@ for idx, customer in customers.iteritems():
     rfm_customer[idx] = {
         'recency': ending_date - reduce(lambda x, y: x if x > y else y, map(lambda x: x['date'], customer)),
         'frequency': len(filter(lambda x: x['date'] > one_year_ago, customer)),
-        'monetization': reduce(lambda x, y: x if x > y else y, map(lambda x: x['amount'], customer))
+        'monetization': sum(map(lambda x: x['amount'], customer)) / float(len(customer))
     }
+
 print 'Awaiting further commands...'
 import pdb
 pdb.set_trace()
