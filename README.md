@@ -1,12 +1,18 @@
 Making an RFM (Recency, Frequency, Monetization) model from the [Acquire Value Shoppers Challenge](https://www.kaggle.com/c/acquire-valued-shoppers-challenge).
 
+
 ### Installation
 
 1.) Install Python, git, etc.
+
 2.) Clone this repo.
+
 3.) `pip install python-dateutil`
+
 4.) Install [Vowpal Platypus](https://github.com/peterhurford/vowpal_platypus)
+
 5.) Install [Pyspark](http://spark.apache.org/docs/latest/api/python/pyspark.html)
+
 
 ### Run for Yourself
 
