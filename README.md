@@ -15,10 +15,19 @@ Making an RFM (Recency, Frequency, Monetization) model from the [Acquire Value S
 
 6.) Install [Vowpal Platypus](https://github.com/peterhurford/vowpal_platypus)
 
+
+### Run Example
+
+```
+python rfm.py --cores 4
+```
+
+
+## Bakeoff Against Spark
+
 7.) Install [Pyspark](http://spark.apache.org/docs/latest/api/python/pyspark.html)
 
-
-### Run for Yourself
+Run one at a time and benchmark:
 
 ```
 python rfm.py --cores 4 # Python example
@@ -30,4 +39,4 @@ spark-submit --master local[4] --driver-memory 8G --packages com.databricks:spar
 * Pyspark v1.6.2: 10M in 6m15s (0.0375ms/row) with 4 cores
 
 **Benchmarks on AWS EC2 m4.10xlarge** (40 core, 160GB RAM)
-* Python v2.7.12: 350M (full set) in 50m9s (0.008606ms/row) with 40 cores
+* Python v2.7.12: 350M (full set) in 50m9s (0.008606ms/row) with 40 cores (costs $2.16)
