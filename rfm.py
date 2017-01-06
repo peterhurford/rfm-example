@@ -1,6 +1,6 @@
 from collections import Counter
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
+from dateutil.relativedelta import relativedelta  # pip install python-dateutil
 from multiprocessing import Pool
 from vowpal_platypus import split_file
 import time
