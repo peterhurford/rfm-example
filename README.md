@@ -23,7 +23,7 @@ python rfm.py --cores 4
 ```
 
 
-## Bakeoff Against Spark
+### Bakeoff Against Spark
 
 7.) Install [Pyspark](http://spark.apache.org/docs/latest/api/python/pyspark.html)
 
