@@ -74,6 +74,7 @@ rfm_scores_list = pool.map(run_core, filenames)
 rfm_scores = {}
 [rfm_scores.update(scores) for scores in rfm_scores_list]
 customers_sorted_by_rfm = map(lambda x: x[0], sorted(rfm_scores.items(), key=lambda x: x[1]))
+cust_to_decile = zip(customers_sorted_by_rfm, map(lambda x: x / max(int(len(customers_sorted_by_rfm) / 10), 9) + 1, range(len(customers_sorted_by_rfm))))
 print 'Awaiting further commands...'
 import pdb
 pdb.set_trace()
