@@ -65,6 +65,7 @@ def run_core(filename):
     recency_scores = ordinal_score(rfm_customer, 'recency')
     monetization_scores = ordinal_score(rfm_customer, 'monetization')
     rfm_scores = frequency_scores + recency_scores + monetization_scores
+    print '{}: Shuffling back...'.format(filename)
     return rfm_scores
 
 filenames = split_file('data/transactions.csv', num_cores=40, header=True)
