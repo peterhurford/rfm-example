@@ -26,7 +26,7 @@ transactions = (sql_context.read
                 .format('com.databricks.spark.csv')
                 .option('header', 'true')
                 .option('inferSchema', 'true')
-                .load('file://' + os.getcwd() + '/data/trans100k.csv')
+                .load('file://' + os.getcwd() + '/data/trans10m.csv')
                 .repartition(partitions)
                 .withColumn('date2', to_date(col('date')))
                 .select('id',

@@ -1,9 +1,10 @@
 from collections import Counter
 from datetime import datetime
-from dateutil.relativedelta import relativedelta  # pip install python-dateutil
+from dateutil.relativedelta import relativedelta
 from multiprocessing import Pool
 from vowpal_platypus import split_file
 import time
+import argparse
 
 def run_core(filename):
     print '{} Starting...'.format(filename)
@@ -68,13 +69,13 @@ def run_core(filename):
     print '{}: Shuffling back...'.format(filename)
     return rfm_scores
 
-filenames = split_file('data/transactions.csv', num_cores=40, header=True)
-pool = Pool(40)
+parser = argparse.ArgumentParser()
+parser.add_argument('--cores')
+cores = int(parser.parse_args().cores)
+filenames = split_file('data/trans10m.csv', num_cores=cores, header=True)
+pool = Pool(cores)
 rfm_scores_list = pool.map(run_core, filenames)
 rfm_scores = {}
 [rfm_scores.update(scores) for scores in rfm_scores_list]
 customers_sorted_by_rfm = map(lambda x: x[0], sorted(rfm_scores.items(), key=lambda x: x[1]))
-cust_to_decile = zip(customers_sorted_by_rfm, map(lambda x: x / max(int(len(customers_sorted_by_rfm) / 10), 9) + 1, range(len(customers_sorted_by_rfm))))
-print 'Awaiting further commands...'
-import pdb
-pdb.set_trace()
+#cust_to_decile = zip(customers_sorted_by_rfm, map(lambda x: x / max(int(len(customers_sorted_by_rfm) / 10), 9) + 1, range(len(customers_sorted_by_rfm))))
